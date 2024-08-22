@@ -1,6 +1,6 @@
 /*	Spring 2024 STAT 506 - Final Project 				*/
 /* 	Professor Tim Keaton, ebittin@purdue.edu			*/
-LIBNAME PROJ 'G:\My Drive\School\Purdue\Spring 2024\STAT 506\Final Project'; /* 2a LIBNAME statement */
+LIBNAME PROJ 'SpotifyProject\EDIT_FILE_PATH'; /* 2a LIBNAME statement */
 %LET s=song; /* 7d Use macro variables in at least two of the above (TITLE or FOOTNOTE) */
 %LET capL=Love; /* 7d Use macro variables in at least two of the above (TITLE or FOOTNOTE) */
 %Let vol=Volume; /* 7d Use macro variables in at least two of the above (TITLE or FOOTNOTE) */
@@ -42,7 +42,7 @@ RUN;
 OPTIONS FMTSEARCH=(PROJ.myFmts WORK.Formats);
 
 /* Songs from "Everyone Knows the Words To" Playlist (345 obs) */
-PROC IMPORT DATAFILE="G:\My Drive\Purdue\Spring 2024\STAT 506\Final Project\long_playlist.csv"
+PROC IMPORT DATAFILE="SpotifyProject\EDIT_FILE_PATH\long_playlist.csv"
 	DBMS=CSV OUT=songs_noedit REPLACE; /* 1a) PROC IMPORT step */
 	GUESSINGROWS=MAX;
 RUN;
@@ -68,11 +68,11 @@ DATA PROJ.songs;
 	rday=PUT(DATEPART(rdate),DAY2.); /* 21b) Numeric to Character conversion using PUT function */
 	rwkday=PUT(DATEPART(rdate),DOWNAME.); /* 21b) Numeric to Character conversion using PUT function */
 	a=STRIP(artist); /* 19e) STRIP function */
-	IF FIND(a,'é')>0 THEN a=TRANWRD(artist,"é","�"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
-	ELSE IF FIND(a,'å')>0 THEN a=TRANWRD(artist,"å","�"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
+	IF FIND(a,'Ã©')>0 THEN a=TRANWRD(artist,"Ã©","é"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
+	ELSE IF FIND(a,'Ã¥')>0 THEN a=TRANWRD(artist,"Ã¥","å"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
 	ELSE IF FIND(a,'*')>0 THEN a=COMPRESS(artist,'*'); /* 6b) IF THEN; ELSE IF THEN statement, 19d) COMPRESS function */
-	ELSE IF FIND(a,'Ø')>0 THEN a=TRANWRD(artist,"Ø","�"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
-	ELSE IF FIND(a,'–')>0 THEN a=TRANWRD(artist,'–','-'); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
+	ELSE IF FIND(a,'Ã˜')>0 THEN a=TRANWRD(artist,"Ã˜","Ø"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
+	ELSE IF FIND(a,'â€“')>0 THEN a=TRANWRD(artist,'â€“','-'); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
 	FORMAT duration_min duration_sec 8. rdate datetime9. rwkday $dayz.; /* 5d) FORMAT statement */
 	DROP artist release_date time_signature valence tempo VAR1; /* 5c) DROP statement */
 RUN;
@@ -95,11 +95,11 @@ DATA PROJ.tsongs;
 	rday=PUT(DATEPART(rdate),DAY2.); /* 21b) Numeric to Character conversion using PUT function */
 	rwkday=PUT(DATEPART(rdate),DOWNAME.); /* 21b) Numeric to Character conversion using PUT function */
 	a=STRIP(artist); /* 19e) STRIP function */
-	IF FIND(a,'é')>0 THEN a=TRANWRD(artist,"é","�"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
-	ELSE IF FIND(a,'å')>0 THEN a=TRANWRD(artist,"å","�"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
+	IF FIND(a,'Ã©')>0 THEN a=TRANWRD(artist,"Ã©","é"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
+	ELSE IF FIND(a,'Ã¥')>0 THEN a=TRANWRD(artist,"Ã¥","å"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
 	ELSE IF FIND(a,'*')>0 THEN a=COMPRESS(artist,'*'); /* 6b) IF THEN; ELSE IF THEN statement, 19d) COMPRESS function */
-	ELSE IF FIND(a,'Ø')>0 THEN a=TRANWRD(artist,"Ø","�"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
-	ELSE IF FIND(a,'–')>0 THEN a=TRANWRD(artist,'–','-'); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
+	ELSE IF FIND(a,'Ã˜')>0 THEN a=TRANWRD(artist,"Ã˜","Ø"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
+	ELSE IF FIND(a,'â€“')>0 THEN a=TRANWRD(artist,'â€“','-'); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
 	FORMAT duration_min duration_sec 8. rdate datetime9. rwkday $dayz.; /* 5d) FORMAT statement */
 	DROP release_date time_signature tempo VAR1; /* 5c) DROP statement */
 RUN;
@@ -110,7 +110,7 @@ PROC FREQ DATA=PROJ.tsongs ORDER=FREQ; /* 22d) PROC FREQ applying the formats yo
 RUN;
 
 /* Songs from Kaggle "Top Spotify songs from 2010-2019 - BY YEAR" (603 obs) */
-PROC IMPORT DATAFILE="G:\My Drive\Purdue\Spring 2024\STAT 506\Final Project\top10s.csv"
+PROC IMPORT DATAFILE="SpotifyProject\EDIT_FILE_PATH\top10s.csv"
 	DBMS=CSV OUT=topsongs_noedit REPLACE;
 	GUESSINGROWS=MAX;
 RUN;
@@ -118,11 +118,11 @@ DATA PROJ.topsongs;
 	SET topsongs_noedit(RENAME=(title=&s year=ryear bpm=tempo nrgy=energy dnce=danceability dB=loudness
 								live=liveness val=valence dur=duration_ms spch=speechiness));
 	a=STRIP(artist); /* 19e */
-	IF FIND(a,'é')>0 THEN a=TRANWRD(artist,"é","�"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
-	ELSE IF FIND(a,'å')>0 THEN a=TRANWRD(artist,"å","�"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
+	IF FIND(a,'Ã©')>0 THEN a=TRANWRD(artist,"Ã©","é"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
+	ELSE IF FIND(a,'Ã¥')>0 THEN a=TRANWRD(artist,"Ã¥","å"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
 	ELSE IF FIND(a,'*')>0 THEN a=COMPRESS(artist,'*'); /* 6b) IF THEN; ELSE IF THEN statement, 19d) COMPRESS function */
-	ELSE IF FIND(a,'Ø')>0 THEN a=TRANWRD(artist,"Ø","�"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
-	ELSE IF FIND(a,'–')>0 THEN a=TRANWRD(artist,'–','-'); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
+	ELSE IF FIND(a,'Ã˜')>0 THEN a=TRANWRD(artist,"Ã˜","Ø"); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
+	ELSE IF FIND(a,'â€“')>0 THEN a=TRANWRD(artist,'â€“','-'); /* 6b) IF THEN; ELSE IF THEN statement, 19c) TRANWRD function */
 	DROP VAR1 acous; /* 5c) DROP statement */
 RUN;
 PROC FREQ DATA=PROJ.topsongs ORDER=FREQ; /* 22d) PROC FREQ applying the formats you created */
