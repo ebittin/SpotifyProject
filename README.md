@@ -4,7 +4,7 @@
 
 This is a final project created by Emma Bittinger for Purdue's Spring 2024 course **STAT 506: Statistical Programming and Data Management.**
 
-1. The first two datasets I scraped from my own ([throwbaccc](https://open.spotify.com/playlist/66kbLWdmxWuMYeByFkqADT])) and another user’s ([Songs Everyone Knows the Words To](https://open.spotify.com/playlist/7dBWDKw7I8kZy0td1VYFIY)) playlist using the Spotify API. The scripts and libraries used to scrape this data are in the [folder](https://github.com/ebittin/SpotifyProject/tree/main/ScraperScripts) of this repository.
+1. The first two datasets I scraped from my own ([throwbaccc](https://open.spotify.com/playlist/66kbLWdmxWuMYeByFkqADT])) and another user’s ([Songs Everyone Knows the Words To](https://open.spotify.com/playlist/7dBWDKw7I8kZy0td1VYFIY)) playlist using the Spotify API. The scripts and libraries used to scrape this data are in the [ScraperScripts](https://github.com/ebittin/SpotifyProject/tree/main/ScraperScripts) folder of this repository.
 
 2. The third dataset is from Kaggle, containing similar data with different but similar column names. This ([Top Spotify Songs from 2010-2019 – BY YEAR](https://www.kaggle.com/datasets/leonardopena/top-spotify-songs-from-20102019-by-year)) (`top10s.csv`) dataset has over 22,000 downloads, indicating its popularity and reliability. 
 
